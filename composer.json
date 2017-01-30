@@ -11,9 +11,7 @@
     "authors": [
         {
             "name": "Munna Khan",
-            "email": "ahkmunna13@gmail.com",
-            "homepage": "www.munnakhan.com",
-            "role": "Developer"
+            "email": "ahkmunna13@gmail.com"
         }
     ],
     "require": {
