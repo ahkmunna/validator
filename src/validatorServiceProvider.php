@@ -13,7 +13,7 @@ class validatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'lang/en/validation', 'validator');
+        $this->loadTranslationsFrom(__DIR__.'lang/en/validation');
 
         $this->publishes([
             __DIR__.'lang/en/validation' => resource_path('lang/vendor/validator'),
