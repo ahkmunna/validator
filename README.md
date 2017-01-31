@@ -14,11 +14,25 @@ Add a new line to the `providers` array:
 
     ahkmunna\validator\validatorServiceProvider::class
 
+##Trandlastions
+Run this command to move the translation files
+
+    php artisan vendor:publish
+
+##Error messages
+Add this method in your validation request class
+
+    public function messages()
+    {
+        return [
+            'email.composite_unique' => trans('validator::validation.composite_unique'),
+        ];
+    }
+
 Now you're ready to start using the validator in your application.
 
-## Usage
 
-###case 1
+###Use case 1
 Like any laravel validation rules:
 
     $rules = array(
@@ -26,7 +40,7 @@ Like any laravel validation rules:
     );
 
 
-###case 2
+###Use case 2
 Pass a value or Check uniqueness with a field that not in current form request:
 
     $rules = array(
@@ -35,11 +49,11 @@ Pass a value or Check uniqueness with a field that not in current form request:
 
 unique_column_2 is passed with a value so the validator will ignore the form request value and compare the field with the given value, It is useful sometimes, you can give a field name that not exist in the form request but in the database table.
 
-###case 3
+###Use case 3
 Check uniqueness with exception:
 
     $rules = array(
         'field_name' => 'composite_unique:table, unique_column_1, unique_column_2, unique_column_3, 1',
     );
 
-The last parameter is a primary key of the table that row will be ignored. Useful for update operation
+The last parameter is a primary key of the table that row will be ignored. Useful for update operation.
