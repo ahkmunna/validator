@@ -13,6 +13,20 @@ class validatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__.'../lang/en/validation', 'validator');
+
+        $this->publishes([
+            __DIR__.'../lang/en/validation' => resource_path('lang/vendor/validator'),
+        ]);
+    }
+
+    /**
+     * Register any package services.
+     *
+     * @return void
+     */
+    public function register()
+    {
         $this->app['validator']->extend(
             'composite_unique',
             function ($attribute, $value, $parameters, $validator)
@@ -43,10 +57,13 @@ class validatorServiceProvider extends ServiceProvider
                     $t = explode(':', $field); //extract parameters that have value
 
                     // Check if the parameter passed with value
-                    if(isset($t[1]))
+                    if(isset($t[1])){
+                        $t[1] = $t[1] != '' ? $t[1] : null; // IF the padded value is empty then assign NULL
                         $wheres[] = [ $t[0], '=', $t[1] ];  // Passed with value, so assign the value to the field
-                    else
+                    }
+                    else{
                         $wheres[] = [ $field, '=', \Request::get( $field ) ];  // Passed field name only, so find the value in form request
+                    }
                 }
 
                 // Our conditional array is ready and now query the table with all the conditions
@@ -54,17 +71,7 @@ class validatorServiceProvider extends ServiceProvider
 
                 //Return FLASE if any record found
                 return empty( $result );
-            }, 'The :attribute already exists.'
+            }
         );
-    }
-
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }
