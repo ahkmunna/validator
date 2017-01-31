@@ -4,18 +4,18 @@ A muti-column unique validation extension with exception for Laravel 5.*
 ## Installation
 Install the package through [Composer](http://getcomposer.org/).
 
-Run the Composer require command from the Terminal:
+On you project directory run the `composer require` command from the Terminal:
 
     composer require ahkmunna/validator
 
-Now all you have to do is add the service provider of the package and alias the package. To do this open your `config/app.php` file.
+Now add the service provider to your `config/app.php` file.
 
 Add a new line to the `providers` array:
 
     ahkmunna\validator\validatorServiceProvider::class
 
-##Trandlastions
-Run this command to move the translation files
+##Translations
+Run this command to move the translation file
 
     php artisan vendor:publish
 
