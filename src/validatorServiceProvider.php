@@ -13,11 +13,14 @@ class validatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'lang/en/validation');
+        $this->loadTranslationsFrom(__DIR__.'lang/vendor/validator', 'validator');
 
         $this->publishes([
-            __DIR__.'lang/en/validation' => resource_path('lang/vendor/validator'),
+            __DIR__.'/lang/' => resource_path('lang/vendor/validator'),
         ]);
+
+        // Call the validator method
+        $this->validator();
     }
 
     /**
@@ -26,6 +29,10 @@ class validatorServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
+    {
+    }
+
+    public function validator()
     {
         $this->app['validator']->extend(
             'composite_unique',

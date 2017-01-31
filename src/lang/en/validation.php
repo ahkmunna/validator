@@ -13,4 +13,4 @@ return [
 
     'composite_unique' => 'The :attribute already exists.',
 
-]
+];
